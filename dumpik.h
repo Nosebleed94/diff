@@ -18,8 +18,8 @@ const char adding_html_first[] = "\n"
                                 "margin = 0.3;\n"
                                 "ranksep = 1.0;\n"
                                 "nodesep = 0.9;\n"
-                                "bgcolor = \"#78FFDB\";\n"
-                                "edge [color=\"#FF69B4\"];\n"
+                                "bgcolor = \"#FFFFFF\";\n"
+                                "edge [color=\"#FFFFFF\"];\n"
                                 "\n";
 
 void Dump_moment         (struct Node_t* node);

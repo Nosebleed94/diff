@@ -30,7 +30,7 @@ void Dump_moment (struct Node_t* node)
 
     Print_struct_node (node, file_dump);
     
-    Print_dot (node, file_dump);
+    //Print_dot (node, file_dump);
 
     char command[SIZE_COMMAND] = {};
     snprintf (command, sizeof(command), "dot -Tpng %s -o %.22s.png", filename, filename);
@@ -52,12 +52,12 @@ void Print_dot (struct Node_t* node, FILE* file)
 
     if (node->yes)
     {
-        fprintf   (file,"%s:<f2> -> %s\n", node->data_node, node->yes->data_node);
+        fprintf   (file,"%s:<f2> -> %s\n", node->elem, node->yes->elem);
         Print_dot (node->yes, file);
     }
     if (node->no)
     {
-        fprintf   (file, "%s:<f1> -> %s\n", node->data_node, node->no->data_node);
+        fprintf   (file, "%s:<f1> -> %s\n", node->elem, node->no->elem);
         Print_dot (node->no, file);
     }
 }
@@ -68,9 +68,32 @@ void Print_struct_node (struct Node_t* node, FILE* file)
 
     if (!node) return; 
 
-    void* pointer = (void*)(uintptr_t)node->data_node; // спросить Вову 
-    fprintf (file, "%s[shape=record, label= \"{ip: %p | data: %s | {<f1> no | <f2> yes}}\"];\n", 
-    node->data_node, pointer, node->data_node);
+    if (strcmp (node->elem.operation, "@") == 0 && node->elem.number == 0)
+    {
+        void* pointer = (void*)(uintptr_t)node->elem.variable;
+        char address[20]; 
+        sprintf(address, "%p", pointer);  
+        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> N}}\", style=filled, fillcolor=\"lightcyan\", color=\"cyan\"];\n", 
+        address + 2, node->type, node->elem.variable);
+    }
+
+    if (strcmp (node->elem.variable, "@") == 0 && node->elem.number == 0)
+    {
+        void* pointer = (void*)(uintptr_t)node->elem.operation;
+        char address[20]; 
+        sprintf(address, "%p", pointer);  
+        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> N}}\",style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
+        address + 2, node->type, node->elem.operation);
+    }
+
+    else
+    {
+        void* pointer = (void*)(uintptr_t)node->elem.number;
+        char address[20]; 
+        sprintf(address, "%p", pointer);  
+        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %d | {<f1> L | <f2> N}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
+        address+ 2, node->type, node->elem.number);
+    }
 
     if (node->no)   {Print_struct_node (node->no, file);}
     if (node->yes)  {Print_struct_node (node->yes, file);}

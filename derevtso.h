@@ -6,6 +6,8 @@ const int SIZE_COMMAND  = 256;
 const int SIZE_ANSWER   = 4;
 const int SIZE_SING     = 100;
 const int SIZE_OBJECT   = 25;
+const char VARIABLE[]   = "x";
+
 
 enum type_node 
 {
@@ -23,7 +25,7 @@ struct Elem_t
 
 struct Node_t
 {
-    char* data_node;
+    Elem_t elem;
     Node_t* no;
     Node_t* yes;
     Node_t* otets;
@@ -35,5 +37,6 @@ void Read_word                    (char** arr, char* word);
 Node_t* create_node               (char* data, Node_t* node);
 int Quentity_letters_in_word      (char* arr);
 void Deductr                      (struct Node_t* node);
+enum type_node Type_definition    (char* data);
 
 #endif // DEREVTSO_H

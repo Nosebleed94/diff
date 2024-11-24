@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "derevtso.h"
 
@@ -10,8 +11,34 @@ struct Node_t* create_node (char* data, Node_t* node)
     assert (data);
 
     struct Node_t* newNode = (struct Node_t*)calloc(1, sizeof(struct Node_t));
-    newNode->data_node = (char*)calloc(strlen(data) + 1, sizeof(char));
-    strcpy (newNode->data_node, data);
+
+    if (Type_definition(data) == FIRST)
+    {
+        newNode->elem.variable = (char*)calloc(strlen(data) + 1, sizeof(char));
+        newNode->elem.operation = (char*)calloc(2, sizeof(char)); 
+        newNode->type = FIRST;
+        strcpy (newNode->elem.variable, data);
+        strcpy (newNode->elem.operation, "@");
+        newNode->elem.number = 0;
+    }
+    if (Type_definition(data) == THIRD)
+    {
+        newNode->elem.operation = (char*)calloc(strlen(data) + 1, sizeof(char));
+        newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
+        newNode->type = THIRD;
+        strcpy (newNode->elem.operation, data);
+        strcpy (newNode->elem.variable, "@");
+        newNode->elem.number = 0;
+    }
+    else
+    {
+        newNode->type = SECOND;
+        newNode->elem.number = atoi(data);
+        newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
+        newNode->elem.operation = (char*)calloc(2, sizeof(char)); 
+        strcpy (newNode->elem.operation, "@");
+        strcpy (newNode->elem.variable, "@");
+    }
     newNode->otets = node;
     newNode->no  = NULL;
     newNode->yes = NULL;
@@ -82,7 +109,15 @@ void Deductr (struct Node_t* node)
     {
         Deductr   (node->yes);
         Deductr   (node->no);
-        free      (node->data_node);
+        free      (node->elem.operation);
+        free      (node->elem.variable);
         free      (node);
     }
+}
+
+enum type_node Type_definition (char* data)
+{
+    for (const char* p = data; *p != '\0'; p++) {if (!isdigit(*p)) {return THIRD;}}  
+    if (strcmp (VARIABLE, data) == 0) {return FIRST;}
+    else                              {return SECOND;}
 }
