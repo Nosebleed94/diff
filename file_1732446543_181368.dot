@@ -1,0 +1,28 @@
+
+digraph structs {
+charset = "UTF-8";
+rankdir=TB;
+bgcolor = "#0000aa";
+fontcolor = black;
+fontsize = 18;
+style = "rounded";
+margin = 0.3;
+ranksep = 1.0;
+nodesep = 0.9;
+bgcolor = "#78FFDB";
+edge [color="#FF69B4"];
+
+ii/op[shape=record, label= "{ip: 0x602000000010 | data: ii/op | {<f1> no | <f2> yes}}"];
+zz[shape=record, label= "{ip: 0x602000000090 | data: zz | {<f1> no | <f2> yes}}"];
+7[shape=record, label= "{ip: 0x6020000000d0 | data: 7 | {<f1> no | <f2> yes}}"];
+1000[shape=record, label= "{ip: 0x6020000000b0 | data: 1000 | {<f1> no | <f2> yes}}"];
+[shape=record, label= "{ip: 0x602000000030 | data:  | {<f1> no | <f2> yes}}"];
+3[shape=record, label= "{ip: 0x602000000070 | data: 3 | {<f1> no | <f2> yes}}"];
+x[shape=record, label= "{ip: 0x602000000050 | data: x | {<f1> no | <f2> yes}}"];
+ii/op:<f2> -> 
+:<f2> -> x
+:<f1> -> 3
+ii/op:<f1> -> zz
+zz:<f2> -> 1000
+zz:<f1> -> 7
+}
