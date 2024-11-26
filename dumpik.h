@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-const char yes[] = "yes";
-const char no[] = "no";
+const char right[] = "right";
+const char left[] = "left";
 
 const char adding_html_first[] = "\n"
                                 "digraph structs {\n"
@@ -17,13 +17,13 @@ const char adding_html_first[] = "\n"
                                 "style = \"rounded\";\n"
                                 "margin = 0.3;\n"
                                 "ranksep = 1.0;\n"
-                                "nodesep = 0.9;\n"
+                                "Nodesep = 0.9;\n"
                                 "bgcolor = \"#FFFFFF\";\n"
-                                "edge [color=\"#FFFFFF\"];\n"
+                                "edge [color=\"#000000\"];\n"
                                 "\n";
 
-void Dump_moment         (struct Node_t* node);
-void Print_dot           (struct Node_t* node, FILE* file);
-void Print_struct_node   (struct Node_t* node, FILE* file);
+void Dump_moment                         (struct Node_t* Node);
+void Print_dot                           (struct Node_t* Node, FILE* file);
+void Print_struct_Node                   (struct Node_t* Node, FILE* file);
 
 #endif // DUMPIK_H

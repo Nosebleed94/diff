@@ -8,10 +8,11 @@
 
 #include "derevtso.h"
 #include "dumpik.h"
+#include "defining_operation.h"
 
-void Dump_moment (struct Node_t* node)
+void Dump_moment (struct Node_t* Node)
 {
-    assert (node);
+    assert (Node);
     
     struct timeval tv;
     gettimeofday (&tv, NULL);
@@ -28,9 +29,9 @@ void Dump_moment (struct Node_t* node)
 
     fprintf (file_dump, "%s", adding_html_first);
 
-    Print_struct_node (node, file_dump);
+    Print_struct_Node (Node, file_dump);
     
-    //Print_dot (node, file_dump);
+    Print_dot (Node, file_dump);
 
     char command[SIZE_COMMAND] = {};
     snprintf (command, sizeof(command), "dot -Tpng %s -o %.22s.png", filename, filename);
@@ -44,57 +45,53 @@ void Dump_moment (struct Node_t* node)
     return;
 }
 
-void Print_dot (struct Node_t* node, FILE* file)
+void Print_dot (struct Node_t* Node, FILE* file)
 {
-    assert (node);
+    assert (Node);
 
-    if (!node) return; 
+    if (!Node) return; 
 
-    if (node->yes)
+    if (Node->right)
     {
-        fprintf   (file,"%s:<f2> -> %s\n", node->elem, node->yes->elem);
-        Print_dot (node->yes, file);
+        fprintf   (file,"%s:<f2> -> %s\n", Node->name_Node, Node->right->name_Node);
+        Print_dot (Node->right, file);
     }
-    if (node->no)
+    if (Node->left)
     {
-        fprintf   (file, "%s:<f1> -> %s\n", node->elem, node->no->elem);
-        Print_dot (node->no, file);
+        fprintf   (file, "%s:<f1> -> %s\n", Node->name_Node, Node->left->name_Node);
+        Print_dot (Node->left, file);
     }
 }
 
-void Print_struct_node (struct Node_t* node, FILE* file)
+void Print_struct_Node (struct Node_t* Node, FILE* file)
 {
-    assert (node);
-
-    if (!node) return; 
-
-    if (strcmp (node->elem.operation, "@") == 0 && node->elem.number == 0)
+    assert (Node);
+    if (!Node) return;
+    
+    if (Node->type == FIRST)
     {
-        void* pointer = (void*)(uintptr_t)node->elem.variable;
-        char address[20]; 
-        sprintf(address, "%p", pointer);  
-        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> N}}\", style=filled, fillcolor=\"lightcyan\", color=\"cyan\"];\n", 
-        address + 2, node->type, node->elem.variable);
+        printf ("type one = [%s]\n", Node->elem.variable);
+        void* pointer = (void*)(uintptr_t)Node->elem.variable;  
+        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> R}}\", style=filled, fillcolor=\"lightcyan\", color=\"cyan\"];\n", 
+        Node->name_Node, Node->type, Node->elem.variable);
     }
 
-    if (strcmp (node->elem.variable, "@") == 0 && node->elem.number == 0)
+    if (Node->type == THIRD)
     {
-        void* pointer = (void*)(uintptr_t)node->elem.operation;
-        char address[20]; 
-        sprintf(address, "%p", pointer);  
-        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> N}}\",style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
-        address + 2, node->type, node->elem.operation);
+        fprintf (stderr,"Node = [%d]\n", Node->elem.operation);
+        void* pointer = (void*)(uintptr_t)Node->elem.operation;
+        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
+        Node->name_Node, Node->type, Defining_operations_for_dump (Node->elem.operation));
     }
 
-    else
+    if (Node->type == SECOND)
     {
-        void* pointer = (void*)(uintptr_t)node->elem.number;
-        char address[20]; 
-        sprintf(address, "%p", pointer);  
-        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %d | {<f1> L | <f2> N}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
-        address+ 2, node->type, node->elem.number);
+        void* pointer = (void*)(uintptr_t)Node->elem.number;
+        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %d | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
+        Node->name_Node, Node->type, Node->elem.number);
     }
 
-    if (node->no)   {Print_struct_node (node->no, file);}
-    if (node->yes)  {Print_struct_node (node->yes, file);}
+    if (Node->left)   {Print_struct_Node (Node->left, file);}
+    if (Node->right)  {Print_struct_Node (Node->right, file);}
+    
 }

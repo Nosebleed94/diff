@@ -12,16 +12,15 @@ int main()
     assert (file_derevtso);
 
     char* arr =  Filling_buffer (file_derevtso, &arr);
-    printf("{%s}", arr);
 
     arr++;
 
-    struct Node_t* node = Сonverter_tree (&arr, NULL);
-    assert (node);
+    struct Node_t* Node = Сonverter_tree (&arr, NULL);
+    assert (Node);
 
-    Dump_moment (node);
+    Dump_moment (Node);
 
-    Deductr (node);
+    Deductr (Node);
 
     return 0;
 
