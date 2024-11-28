@@ -5,6 +5,8 @@
 #include "derevtso.h"
 #include "filbuf.h"
 #include "dumpik.h"
+#include "optimisation.h"
+#include "copy_tree.h"
 
 int main()
 {
@@ -17,6 +19,18 @@ int main()
 
     struct Node_t* Node = Сonverter_tree (&arr, NULL);
     assert (Node);
+
+    struct Node_t* CopyNode = Copy_tree (Node);
+
+    Dump_moment (CopyNode);
+
+    Dump_moment (Node);
+
+    First_optimisation (Node);
+
+    Dump_moment (Node);
+
+    Second_optimisation (Node);
 
     Dump_moment (Node);
 

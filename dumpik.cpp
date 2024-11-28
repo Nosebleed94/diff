@@ -16,10 +16,10 @@ void Dump_moment (struct Node_t* Node)
     
     struct timeval tv;
     gettimeofday (&tv, NULL);
-    long seconds = tv.tv_sec;
-    long microseconds = tv.tv_usec;
+    long NUMBERs = tv.tv_sec;
+    long microNUMBERs = tv.tv_usec;
     char filename[SIZE_FILENAME] = {0};
-    snprintf (filename, sizeof(filename), "file_%ld_%06ld.dot",  seconds, microseconds);
+    snprintf (filename, sizeof(filename), "file_%ld_%06ld.dot",  NUMBERs, microNUMBERs);
     
     FILE* file_html = fopen ("dump.html", "a+");
     assert (file_html && "file open err");
@@ -27,7 +27,7 @@ void Dump_moment (struct Node_t* Node)
     FILE* file_dump = fopen (filename, "a+");
     assert (file_dump && "file open err");
 
-    fprintf (file_dump, "%s", adding_html_first);
+    fprintf (file_dump, "%s", adding_html_X);
 
     Print_struct_Node (Node, file_dump);
     
@@ -35,7 +35,7 @@ void Dump_moment (struct Node_t* Node)
 
     char command[SIZE_COMMAND] = {};
     snprintf (command, sizeof(command), "dot -Tpng %s -o %.22s.png", filename, filename);
-    snprintf (filename, sizeof(filename), "file_%ld_%06ld.png",  seconds, microseconds);
+    snprintf (filename, sizeof(filename), "file_%ld_%06ld.png",  NUMBERs, microNUMBERs);
     fprintf  (file_html, "\t<img src=\"%s\"/>\n", filename);
     fprintf  (file_dump, "}\n");
     fclose   (file_dump);   
@@ -53,12 +53,12 @@ void Print_dot (struct Node_t* Node, FILE* file)
 
     if (Node->right)
     {
-        fprintf   (file,"%s:<f2> -> %s\n", Node->name_Node, Node->right->name_Node);
+        fprintf   (file,"%d:<f2> -> %d\n", &(Node->elem), &(Node->right->elem));
         Print_dot (Node->right, file);
     }
     if (Node->left)
     {
-        fprintf   (file, "%s:<f1> -> %s\n", Node->name_Node, Node->left->name_Node);
+        fprintf   (file, "%d:<f1> -> %d\n", &(Node->elem), &(Node->left->elem));
         Print_dot (Node->left, file);
     }
 }
@@ -68,27 +68,25 @@ void Print_struct_Node (struct Node_t* Node, FILE* file)
     assert (Node);
     if (!Node) return;
     
-    if (Node->type == FIRST)
+    if (Node->type == X)
     {
-        printf ("type one = [%s]\n", Node->elem.variable);
         void* pointer = (void*)(uintptr_t)Node->elem.variable;  
-        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> R}}\", style=filled, fillcolor=\"lightcyan\", color=\"cyan\"];\n", 
-        Node->name_Node, Node->type, Node->elem.variable);
+        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %s | {<f1> L | <f2> R}}\", style=filled, fillcolor=\"lightcyan\", color=\"cyan\"];\n", 
+        &(Node->elem),  Node->elem.variable, Node->type, Node->elem.variable);
     }
 
-    if (Node->type == THIRD)
+    if (Node->type == OPERATION)
     {
-        fprintf (stderr,"Node = [%d]\n", Node->elem.operation);
         void* pointer = (void*)(uintptr_t)Node->elem.operation;
-        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %s | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
-        Node->name_Node, Node->type, Defining_operations_for_dump (Node->elem.operation));
+        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %s | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
+        &(Node->elem), Node->elem.operation,  Node->type, Defining_operations_for_dump (Node->elem.operation));
     }
 
-    if (Node->type == SECOND)
+    if (Node->type == NUMBER)
     {
         void* pointer = (void*)(uintptr_t)Node->elem.number;
-        fprintf (file, "%s[shape=record, label= \"{type: %d| value: %d | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
-        Node->name_Node, Node->type, Node->elem.number);
+        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %d | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
+        &(Node->elem), Node->elem.number, Node->type, Node->elem.number);
     }
 
     if (Node->left)   {Print_struct_Node (Node->left, file);}

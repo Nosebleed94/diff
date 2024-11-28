@@ -11,9 +11,9 @@ const char VARIABLE[]   = "x";
 
 enum type_Node 
 {
-    FIRST   = 1,     //x
-    SECOND  = 2,     //число
-    THIRD   = 3,     //операция
+    X           = 1,     
+    NUMBER      = 2,     
+    OPERATION   = 3,     
 };
 
 struct Elem_t
@@ -30,7 +30,6 @@ struct Node_t
     Node_t* right;
     Node_t* otets;
     type_Node type;
-    char* name_Node;
 };
 
 struct Node_t* Сonverter_tree                (char** arr, Node_t* otets);
@@ -39,6 +38,5 @@ Node_t* create_Node                          (char* data, Node_t* Node);
 int Quentity_letters_in_word                 (char* arr);
 void Deductr                                 (struct Node_t* Node);
 enum type_Node Type_definition               (char* data);
-void assign_random_number_to_name            (Node_t* Node);
 
 #endif // DEREVTSO_H

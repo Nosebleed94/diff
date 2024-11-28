@@ -12,39 +12,34 @@ struct Node_t* create_Node (char* data, Node_t* Node)
     assert (data);
 
     struct Node_t* newNode = (struct Node_t*)calloc(1, sizeof(struct Node_t));
-    if (Type_definition(data) == FIRST)
+    if (Type_definition(data) == X)
     {
         newNode->elem.variable = (char*)calloc(strlen(data) + 1, sizeof(char));
-        newNode->type = FIRST;
-        newNode->elem.number = 0;
+        newNode->type = X;
+        newNode->elem.number = 10;
         newNode->elem.operation = 0;
 
         strcpy (newNode->elem.variable, data); 
         
     }
-    if (Type_definition(data) == THIRD)
+    if (Type_definition(data) == OPERATION)
     {
         newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
-        newNode->type = THIRD;
-        newNode->elem.number = 0;
+        newNode->type = OPERATION;
+        newNode->elem.number = 10;
         
         newNode->elem.operation = Defining_operation_for_Node (data); 
-        printf ("Node = [%s]  ", data);
-        printf ("operation = [%d]\n", newNode->elem.operation);
         strcpy (newNode->elem.variable, "@");
     }
-    if (Type_definition(data) == SECOND)
+    if (Type_definition(data) == NUMBER)
     {
-        newNode->type = SECOND;
+        newNode->type = NUMBER;
         newNode->elem.number = atoi(data);
         newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
         newNode->elem.operation = 0;
         strcpy (newNode->elem.variable, "@");
     }
     newNode->otets = Node;
-
-    assign_random_number_to_name(newNode);
-
     newNode->left  = NULL;
     newNode->right = NULL;
 
@@ -110,7 +105,6 @@ int Quentity_letters_in_word (char* arr)
 
 void Deductr (struct Node_t* Node)
 {   
-    //assert не нужен 
     if (Node)
     {
         Deductr   (Node->right);
@@ -124,19 +118,9 @@ enum type_Node Type_definition (char* data)
 {
     if (strcmp (VARIABLE, data) == 0) 
     {
-        return FIRST;
+        return X;
     }
-    for (const char* p = data; *p != '\0'; p++) {if (!isdigit(*p)) {return THIRD;}}  
-    return SECOND;
+    for (const char* p = data; *p != '\0'; p++) {if (!isdigit(*p)) {return OPERATION;}}  
+    return NUMBER;
 }
 
-void assign_random_number_to_name(Node_t* Node) {
-    if (Node == NULL) {
-        return;
-    }
-    int random_number = rand() % 1000000 + 1;
-    char buffer[10]; 
-    sprintf(buffer, "%d", random_number);
-    Node->name_Node = (char*)calloc(strlen(buffer) + 1, sizeof(char));
-    strcpy(Node->name_Node, buffer);
-}

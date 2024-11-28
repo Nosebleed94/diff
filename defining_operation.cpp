@@ -23,6 +23,7 @@ const char* TH      = "th";
 const char* CTH     = "cth";
 const char* LOG     = "log";
 const char* LN      = "ln";
+const char* NOTHING = "nothig";
 
 
 enum operation Defining_operation_for_Node (char* data)
@@ -47,6 +48,7 @@ enum operation Defining_operation_for_Node (char* data)
     if (strcmp (CTH, data) == 0)     {return _CTH;}
     if (strcmp (LOG, data) == 0)     {return _LOG;}
     if (strcmp (LN, data) == 0)      {return _LN;}
+    return _NOTHING;
 }
 
 const char* Defining_operations_for_dump (int operation)
@@ -70,4 +72,5 @@ const char* Defining_operations_for_dump (int operation)
     if (operation == _CTH)    {return CTH;}
     if (operation == _LOG)    {return LOG;}
     if (operation == _LN)     {return LN;}
+    return NOTHING;
 }

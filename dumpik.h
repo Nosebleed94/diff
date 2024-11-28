@@ -7,7 +7,7 @@
 const char right[] = "right";
 const char left[] = "left";
 
-const char adding_html_first[] = "\n"
+const char adding_html_X[] = "\n"
                                 "digraph structs {\n"
                                 "charset = \"UTF-8\";\n"
                                 "rankdir=TB;\n"

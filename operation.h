@@ -3,6 +3,7 @@
 
 enum operation
 {
+    _NOTHING  = 0,
     _ADD      = 1,
     _SUB      = 2,
     _MUL      = 3,
