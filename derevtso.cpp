@@ -10,7 +10,7 @@
 struct Node_t* create_Node (char* data, Node_t* Node)
 {
     assert (data);
-
+    
     struct Node_t* newNode = (struct Node_t*)calloc(1, sizeof(struct Node_t));
     if (Type_definition(data) == X)
     {
@@ -18,7 +18,6 @@ struct Node_t* create_Node (char* data, Node_t* Node)
         newNode->type = X;
         newNode->elem.number = 10;
         newNode->elem.operation = 0;
-
         strcpy (newNode->elem.variable, data); 
         
     }
@@ -34,6 +33,7 @@ struct Node_t* create_Node (char* data, Node_t* Node)
     if (Type_definition(data) == NUMBER)
     {
         newNode->type = NUMBER;
+        fprintf (stderr,"\n\n\nтип узла = [%d]\n\n\n", newNode->type);
         newNode->elem.number = atoi(data);
         newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
         newNode->elem.operation = 0;
@@ -123,4 +123,3 @@ enum type_Node Type_definition (char* data)
     for (const char* p = data; *p != '\0'; p++) {if (!isdigit(*p)) {return OPERATION;}}  
     return NUMBER;
 }
-

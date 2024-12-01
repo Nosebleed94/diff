@@ -61,7 +61,6 @@ void Second_optimisation (Node_t* node)
 
     if (TYPES_NO_NUMBER_AND_X)
     {
-        fprintf(stderr,"211111111111");
         Second_optimisation (node->left);
     }
     if (TYPES_NUMBER_AND_X)
@@ -88,7 +87,7 @@ Node_t* Second_optimisation_operation_with_node (Node_t* node)
 {
     if (CONDITION_FOR_START_SECOND_OPTIMIZATION)
     {
-        if (node->elem.operation == _ADD) {RESULT(X, 0)}
+        if ((node->right->elem.number == 0 || node->right->elem.number == 0) && node->elem.operation == _ADD) {RESULT(X, 0)}
         if (node->elem.operation == _SUB) {RESULT(X, 0)}
         if (node->elem.operation == _MUL) {RESULT(NUMBER, 0)}
         

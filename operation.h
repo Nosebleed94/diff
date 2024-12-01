@@ -1,28 +1,25 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-enum operation
-{
-    _NOTHING  = 0,
-    _ADD      = 1,
-    _SUB      = 2,
-    _MUL      = 3,
-    _DIV      = 4,
-    _DEG      = 5,
-    _SIN      = 6,
-    _COS      = 7,
-    _TG       = 8,
-    _CTG      = 9,
-    _ARCSIN   = 10,
-    _ARCCOS   = 11, 
-    _ARCTG    = 12,
-    _ARCCTG   = 13,
-    _SH       = 14,
-    _CH       = 15,
-    _TH       = 16,
-    _CTH      = 17,
-    _LOG      = 18,
-    _LN       = 19,
-};
+static const  char* ADD     = "+";
+static const char* SUB     = "-";
+static const char* MUL     = "*";
+static const char* DIV     = "/";
+static const char* DEG     = "^";
+static const char* SIN     = "sin";
+static const char* COS     = "cos";
+static const char* TG      = "tg";
+static const char* CTG     = "ctg";
+static const char* ARCSIN  = "arcsin";
+static const char* ARCCOS  = "arccos";
+static const char* ARCTG   = "arctg";
+static const char* ARCCTG  = "arcctg";
+static const char* SH      = "sh";
+static const char* CH      = "ch";
+static const char* TH      = "th";
+static const char* CTH     = "cth";
+static const char* LOG     = "log";
+static const char* LN      = "ln";
+static const char* NOTHING = "nothig";
 
 #endif // OPERATION_H

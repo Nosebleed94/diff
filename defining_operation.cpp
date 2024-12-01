@@ -3,28 +3,7 @@
 
 #include "operation.h"
 #include "defining_operation.h"
-
-const char* ADD     = "+";
-const char* SUB     = "-";
-const char* MUL     = "*";
-const char* DIV     = "/";
-const char* DEG     = "^";
-const char* SIN     = "sin";
-const char* COS     = "cos";
-const char* TG      = "tg";
-const char* CTG     = "ctg";
-const char* ARCSIN  = "arcsin";
-const char* ARCCOS  = "arccos";
-const char* ARCTG   = "arctg";
-const char* ARCCTG  = "arcctg";
-const char* SH      = "sh";
-const char* CH      = "ch";
-const char* TH      = "th";
-const char* CTH     = "cth";
-const char* LOG     = "log";
-const char* LN      = "ln";
-const char* NOTHING = "nothig";
-
+#include "operation.h"
 
 enum operation Defining_operation_for_Node (char* data)
 {

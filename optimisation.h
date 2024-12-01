@@ -3,6 +3,7 @@
 
 #include "derevtso.h"
 #include "operation.h"
+#include "enum_operation.h"
 
 void First_optimisation                           (Node_t* Node);
 void Second_optimisation                          (Node_t* node);

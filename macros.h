@@ -14,7 +14,7 @@
 
 #define NODES_NOT_NUMBER (node->left->type != NUMBER || node->right->type != NUMBER)
 #define ALL_TYPE_NUMBER  (node->left->type == NUMBER && node->right->type == NUMBER) //FIXME
-#define CONDITION_FOR_START_SECOND_OPTIMIZATION (node->left->elem.number == 0 || node->left->elem.number == 1 || \  
+#define CONDITION_FOR_START_SECOND_OPTIMIZATION (node->left->elem.number == 0 || node->left->elem.number == 1 || \
                                                  node->right->elem.number == 0 || node->right->elem.number == 1)
 #define NODE_NOT_OPERATION (node->type == NUMBER || node->type == X)
 #define TYPES_NO_NUMBER_AND_X (!(node->left->type == NUMBER && node->right->type == X) || \

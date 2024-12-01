@@ -13,14 +13,15 @@ enum type_Node
 {
     X           = 1,     
     NUMBER      = 2,     
-    OPERATION   = 3,     
+    OPERATION   = 3,    
+    NOTHING     = 4, 
 };
 
 struct Elem_t
 {
     int operation;
     char* variable;
-    int number;
+    double number;
 };
 
 struct Node_t

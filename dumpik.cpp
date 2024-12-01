@@ -65,28 +65,33 @@ void Print_dot (struct Node_t* Node, FILE* file)
 
 void Print_struct_Node (struct Node_t* Node, FILE* file)
 {
+    fprintf(stderr,"адрес передаваемого узла [%p]\n", Node);
     assert (Node);
     if (!Node) return;
     
     if (Node->type == X)
     {
+        fprintf (stderr,"адрес икса = [%d]\n", &(Node->elem));
         void* pointer = (void*)(uintptr_t)Node->elem.variable;  
         fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %s | {<f1> L | <f2> R}}\", style=filled, fillcolor=\"lightcyan\", color=\"cyan\"];\n", 
-        &(Node->elem),  Node->elem.variable, Node->type, Node->elem.variable);
+        &(Node->elem), &(Node->elem), Node->type, Node->elem.variable);
     }
 
     if (Node->type == OPERATION)
     {
+        fprintf (stderr,"адрес операции [%d] = [%d]\n",Node->elem.operation, &(Node->elem));
         void* pointer = (void*)(uintptr_t)Node->elem.operation;
         fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %s | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
-        &(Node->elem), Node->elem.operation,  Node->type, Defining_operations_for_dump (Node->elem.operation));
+        &(Node->elem), &(Node->elem), Node->type, Defining_operations_for_dump (Node->elem.operation));
     }
 
     if (Node->type == NUMBER)
     {
+        fprintf(stderr, "ebite meni: %p\n", &(Node->elem));
+        fprintf (stderr,"адрес числа [%d] и тип [%d] = [%d]\n",Node->elem.number, Node->type, &(Node->elem));
         void* pointer = (void*)(uintptr_t)Node->elem.number;
-        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %d | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
-        &(Node->elem), Node->elem.number, Node->type, Node->elem.number);
+        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %.2lf| {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
+        &(Node->elem), &(Node->elem), Node->type, Node->elem.number);
     }
 
     if (Node->left)   {Print_struct_Node (Node->left, file);}
