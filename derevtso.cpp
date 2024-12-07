@@ -12,33 +12,51 @@ struct Node_t* create_Node (char* data, Node_t* Node)
     assert (data);
     
     struct Node_t* newNode = (struct Node_t*)calloc(1, sizeof(struct Node_t));
+
     if (Type_definition(data) == X)
     {
         newNode->elem.variable = (char*)calloc(strlen(data) + 1, sizeof(char));
-        newNode->type = X;
-        newNode->elem.number = 10;
+        
+        newNode->elem.number = 0;
         newNode->elem.operation = 0;
         strcpy (newNode->elem.variable, data); 
-        
+
+        newNode->type = X;
     }
+
     if (Type_definition(data) == OPERATION)
     {
         newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
-        newNode->type = OPERATION;
-        newNode->elem.number = 10;
-        
+
+        newNode->elem.number = 0;
         newNode->elem.operation = Defining_operation_for_Node (data); 
         strcpy (newNode->elem.variable, "@");
+
+        newNode->type = OPERATION;
     }
+
     if (Type_definition(data) == NUMBER)
     {
-        newNode->type = NUMBER;
-        fprintf (stderr,"\n\n\nтип узла = [%d]\n\n\n", newNode->type);
-        newNode->elem.number = atoi(data);
         newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
+
+        newNode->elem.number = atoi(data);
         newNode->elem.operation = 0;
         strcpy (newNode->elem.variable, "@");
+
+        newNode->type = NUMBER;
     }
+
+    if (Type_definition(data) == EMPTINESS)
+    {
+        newNode->elem.variable = (char*)calloc(2, sizeof(char)); 
+    
+        newNode->elem.number = 0;
+        newNode->elem.operation = 0;
+        strcpy (newNode->elem.variable, "@");
+
+        newNode->type = EMPTINESS;
+    }
+
     newNode->otets = Node;
     newNode->left  = NULL;
     newNode->right = NULL;
@@ -88,6 +106,7 @@ void Read_word (char** arr, char* word)
     }
     
     strncpy (word, remember_position, *arr - remember_position);
+    fprintf (stderr,"{%s}", word);
 }
 
 int Quentity_letters_in_word (char* arr)
@@ -116,10 +135,8 @@ void Deductr (struct Node_t* Node)
 
 enum type_Node Type_definition (char* data)
 {
-    if (strcmp (VARIABLE, data) == 0) 
-    {
-        return X;
-    }
-    for (const char* p = data; *p != '\0'; p++) {if (!isdigit(*p)) {return OPERATION;}}  
+    if (strcmp (VARIABLE, data) == 0)           {return X;}
+    if (strcmp (data, NOTH) == 0)               {return EMPTINESS;} 
+    for (const char* p = data; *p != '\0'; p++) {if (!isdigit(*p)) {return OPERATION;}} 
     return NUMBER;
 }

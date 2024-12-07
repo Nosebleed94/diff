@@ -7,14 +7,14 @@ const int SIZE_ANSWER   = 4;
 const int SIZE_SING     = 100;
 const int SIZE_OBJECT   = 25;
 const char VARIABLE[]   = "x";
-
+const char NOTH[]       = "";
 
 enum type_Node 
 {
     X           = 1,     
     NUMBER      = 2,     
     OPERATION   = 3,    
-    NOTHING     = 4, 
+    EMPTINESS   = 4, 
 };
 
 struct Elem_t
@@ -33,11 +33,11 @@ struct Node_t
     type_Node type;
 };
 
-struct Node_t* Сonverter_tree                (char** arr, Node_t* otets);
-void Read_word                               (char** arr, char* word);
-Node_t* create_Node                          (char* data, Node_t* Node);
-int Quentity_letters_in_word                 (char* arr);
-void Deductr                                 (struct Node_t* Node);
-enum type_Node Type_definition               (char* data);
+struct Node_t* Сonverter_tree    (char** arr, Node_t* otets);
+void Read_word                   (char** arr, char* word);
+Node_t* create_Node              (char* data, Node_t* Node);
+int Quentity_letters_in_word     (char* arr);
+void Deductr                     (struct Node_t* Node);
+enum type_Node Type_definition   (char* data);
 
 #endif // DEREVTSO_H

@@ -1,7 +1,7 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-static const  char* ADD     = "+";
+static const char* ADD     = "+";
 static const char* SUB     = "-";
 static const char* MUL     = "*";
 static const char* DIV     = "/";
@@ -20,6 +20,6 @@ static const char* TH      = "th";
 static const char* CTH     = "cth";
 static const char* LOG     = "log";
 static const char* LN      = "ln";
-static const char* NOTHING = "nothig";
+static const char* NOTHING  = ""; // изменил " " на ""
 
 #endif // OPERATION_H

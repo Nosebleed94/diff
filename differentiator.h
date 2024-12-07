@@ -26,5 +26,8 @@ struct Node_t* Derivative_th (Node_t* node);
 struct Node_t* Derivative_cth (Node_t* node);
 struct Node_t* Derivative_log (Node_t* node);
 struct Node_t* Derivative_ln (Node_t* node);
+struct Node_t* Derivative_smth_degree_number (Node_t* node);
+struct Node_t* Derivative_another (Node_t* node);
+
 
 #endif // DIFFERENTIATOR_H

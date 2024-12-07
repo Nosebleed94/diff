@@ -8,6 +8,7 @@
 #include "optimisation.h"
 #include "copy_tree.h"
 #include "differentiator.h"
+#include "transfer_to_tex.h"
 
 int main()
 {
@@ -25,17 +26,35 @@ int main()
 
     First_optimisation (Node);
 
-    Dump_moment (Node);
+    // // Dump_moment (Node);
 
     Second_optimisation (Node);
 
-    Dump_moment (Node);
+    // Dump_moment (Node);
 
     struct Node_t* Diff = Differentiator (Node);
 
     Dump_moment (Diff);
 
+    First_optimisation (Diff);
+
+    Second_optimisation (Diff);
+
+    First_optimisation (Diff);
+
+    Second_optimisation (Diff);
+
+    Dump_moment (Diff);
+
+    FILE* file_tex = fopen ("derivative.txt", "w");
+
+    Transfer_to_tex (Node, Diff, file_tex);
+
+    fclose (file_tex);
+
     Deductr (Node);
+
+    Deductr (Diff);
 
     return 0;
 

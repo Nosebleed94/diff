@@ -7,7 +7,6 @@
 
 enum operation Defining_operation_for_Node (char* data)
 {
-    printf ("data in func = {%s}\n", data);
     if (strcmp (ADD, data) == 0)     {return _ADD;}
     if (strcmp (SUB, data) == 0)     {return _SUB;}
     if (strcmp (MUL, data) == 0)     {return _MUL;}
@@ -32,24 +31,24 @@ enum operation Defining_operation_for_Node (char* data)
 
 const char* Defining_operations_for_dump (int operation)
 {
-    if (operation == _ADD)    {return ADD;}
-    if (operation == _SUB)    {return SUB;}
-    if (operation == _MUL)    {return MUL;}
-    if (operation == _DIV)    {return DIV;}
-    if (operation == _DEG)    {return DEG;}
-    if (operation == _SIN)    {return SIN;}
-    if (operation == _COS)    {return COS;}
-    if (operation == _TG)     {return TG;}
-    if (operation == _CTG)    {return CTG;}
-    if (operation == _ARCSIN) {return ARCSIN;}
-    if (operation == _ARCCOS) {return ARCCOS;}
-    if (operation == _ARCTG)  {return ARCTG;}
-    if (operation == _ARCCTG) {return ARCCTG;}
-    if (operation == _SH)     {return SH;}
-    if (operation == _CH)     {return CH;}
-    if (operation == _TH)     {return TH;}
-    if (operation == _CTH)    {return CTH;}
-    if (operation == _LOG)    {return LOG;}
-    if (operation == _LN)     {return LN;}
-    return NOTHING;
+    if (operation == _ADD)      {return ADD;}
+    if (operation == _SUB)      {return SUB;}
+    if (operation == _MUL)      {return MUL;}
+    if (operation == _DIV)      {return DIV;}
+    if (operation == _DEG)      {return DEG;}
+    if (operation == _SIN)      {return SIN;}
+    if (operation == _COS)      {return COS;}
+    if (operation == _TG)       {return TG;}
+    if (operation == _CTG)      {return CTG;}
+    if (operation == _ARCSIN)   {return ARCSIN;}
+    if (operation == _ARCCOS)   {return ARCCOS;}
+    if (operation == _ARCTG)    {return ARCTG;}
+    if (operation == _ARCCTG)   {return ARCCTG;}
+    if (operation == _SH)       {return SH;}
+    if (operation == _CH)       {return CH;}
+    if (operation == _TH)       {return TH;}
+    if (operation == _CTH)      {return CTH;}
+    if (operation == _LOG)      {return LOG;}
+    if (operation == _LN)       {return LN;}
+    if (operation == _NOTHING)  {return NOTHING;}
 }

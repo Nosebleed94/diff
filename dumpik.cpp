@@ -34,8 +34,8 @@ void Dump_moment (struct Node_t* Node)
     Print_dot (Node, file_dump);
 
     char command[SIZE_COMMAND] = {};
-    snprintf (command, sizeof(command), "dot -Tpng %s -o %.22s.png", filename, filename);
-    snprintf (filename, sizeof(filename), "file_%ld_%06ld.png",  NUMBERs, microNUMBERs);
+    snprintf (command, sizeof (command), "dot -Tpng %s -o %.22s.png", filename, filename);
+    snprintf (filename, sizeof (filename), "file_%ld_%06ld.png",  NUMBERs, microNUMBERs);
     fprintf  (file_html, "\t<img src=\"%s\"/>\n", filename);
     fprintf  (file_dump, "}\n");
     fclose   (file_dump);   
@@ -65,13 +65,12 @@ void Print_dot (struct Node_t* Node, FILE* file)
 
 void Print_struct_Node (struct Node_t* Node, FILE* file)
 {
-    fprintf(stderr,"адрес передаваемого узла [%p]\n", Node);
+    fprintf (stderr,"адрес передаваемого узла [%p]\n", Node);
     assert (Node);
     if (!Node) return;
     
     if (Node->type == X)
     {
-        fprintf (stderr,"адрес икса = [%d]\n", &(Node->elem));
         void* pointer = (void*)(uintptr_t)Node->elem.variable;  
         fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %s | {<f1> L | <f2> R}}\", style=filled, fillcolor=\"lightcyan\", color=\"cyan\"];\n", 
         &(Node->elem), &(Node->elem), Node->type, Node->elem.variable);
@@ -79,22 +78,25 @@ void Print_struct_Node (struct Node_t* Node, FILE* file)
 
     if (Node->type == OPERATION)
     {
-        fprintf (stderr,"адрес операции [%d] = [%d]\n",Node->elem.operation, &(Node->elem));
         void* pointer = (void*)(uintptr_t)Node->elem.operation;
-        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %s | {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
+        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %s | {<f1> L | <f2> R}}\", style=filled, fillcolor=\"lightgreen\", color=\"green\"];\n", 
         &(Node->elem), &(Node->elem), Node->type, Defining_operations_for_dump (Node->elem.operation));
     }
 
     if (Node->type == NUMBER)
     {
-        fprintf(stderr, "ebite meni: %p\n", &(Node->elem));
         fprintf (stderr,"адрес числа [%d] и тип [%d] = [%d]\n",Node->elem.number, Node->type, &(Node->elem));
         void* pointer = (void*)(uintptr_t)Node->elem.number;
-        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %.2lf| {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
+        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %.2lf| {<f1> L | <f2> R}}\", style=filled, fillcolor=\"lightpink\", color=\"pink\"];\n", 
+        &(Node->elem), &(Node->elem), Node->type, Node->elem.number);
+    }
+
+    if (Node->type == EMPTINESS)
+    {
+        fprintf (file, "%d[width=2, shape=record, label= \"{ip: %p| type: %d| value: %.2lf| {<f1> L | <f2> R}}\",style=filled, fillcolor=\"lightyellow\", color=\"orange\"];\n", 
         &(Node->elem), &(Node->elem), Node->type, Node->elem.number);
     }
 
     if (Node->left)   {Print_struct_Node (Node->left, file);}
     if (Node->right)  {Print_struct_Node (Node->right, file);}
-    
 }

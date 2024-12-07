@@ -11,13 +11,15 @@ void First_optimisation (Node_t* node)
 {
     if (NODE_NOT_OPERATION)
     {
-        printf ("<Warning> node is not the operation");
+        printf ("<Warning> node is not the operation\n");
         return;
     }
+
     if (NODES_NOT_NUMBER)
     {
         First_optimisation (node->left);
     }
+
     if (ALL_TYPE_NUMBER)
     { 
         First_optimisation_operation_with_node (node);
@@ -55,7 +57,7 @@ void Second_optimisation (Node_t* node)
 {
     if (NODE_NOT_OPERATION)
     {
-        printf ("<Warning> node is not the operation");
+        printf ("<Warning> node is not the operation\n");
         return;
     }
 
@@ -63,6 +65,7 @@ void Second_optimisation (Node_t* node)
     {
         Second_optimisation (node->left);
     }
+
     if (TYPES_NUMBER_AND_X)
     { 
         Second_optimisation_operation_with_node (node);
@@ -114,7 +117,6 @@ Node_t* Second_optimisation_operation_with_node (Node_t* node)
     }
     return node;
 }
-
 
 void First_deducr_certain_node (Node_t* node)
 {

@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[russian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[russian,english]{babel}
+% Картинки
+\graphicspath{{images/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\usepackage{wrapfig}
+\begin{document}
+Здравствуй, пользователь.\\
+Вижу, тебе нужна помощь со взятием производной.\\
+Ну что-ж, давай приступим\\
+Твоя функция выглядит так\\
+\[
+f(x) = x+ 3.00 * x+ 9.00 
+\]
+Производная от твой функции будет выглядеть вот так:\\
+\[
+(f(x))' = 1.00 * x+ 3.00 + 1.00 * x+ 9.00 
+\]
+Спасибо, что воспользовался моей программой, удачи\\
+\end{document}
